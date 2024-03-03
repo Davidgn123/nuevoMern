@@ -23,6 +23,7 @@ export const createTask = async (req, res) =>{
         tiempoEstimado,
         estado,
         medioTransporte,
+        user:req.user.id
         
         
     });

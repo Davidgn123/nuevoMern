@@ -29,10 +29,11 @@ const rutaSchema = new mongoose.Schema({
     //puntosDeReferenciaIdpuntosReferencia: { type: Number, ref: 'PuntosDeReferencia' },
 
     //tutorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Tutor' },
-    //menorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Menor' },
+
+   // menorId: { type: mongoose.Schema.Types.ObjectId, ref: 'menors', required: true},
 },
 
-
+    
 {
     timestamps: true
 });
