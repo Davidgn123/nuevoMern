@@ -16,6 +16,6 @@ app.use(cookieParser());
 
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
-app.use("/api", menorRoutes);
+//app.use("/api", menorRoutes);
 
 export default app;
