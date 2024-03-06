@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-    const uri = 'mongodb+srv://NicoleGalindez:nicole2501@cluster0.rw5wf5u.mongodb.net/Backend_ConfiApp';
+    const uri = 'mongodb+srv://confiapp:SvBAB1g5X0TOHYQz@confiappdb.tyhelql.mongodb.net/';
     await mongoose.connect(uri, );
     console.log('Conexión a la base de datos exitosa');
   } catch (error) {

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authRequired } from "../middlewares/validateToken.js";
-import { getMenor,getMenores,createMenor,deleteMenor, updateMenor } from "../controllers/menor.controller.js";
+import { getMenor, getMenores,createMenor,deleteMenor, updateMenor } from "../controllers/menor.controller.js";
 
 const router = Router()
 
