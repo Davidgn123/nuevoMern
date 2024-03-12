@@ -27,6 +27,8 @@ export const createTask = async (req, res) =>{
         
         
     });
+    const savedTask = await newTask.save();
+    res.json(savedTask);
 
     
 };
