@@ -9,20 +9,31 @@ export const getTasks = async (req, res) =>{
 };
 
 export const createTask = async (req, res) =>{
-    const {fechaRuta, puntoSalida, geosalida, puntoLlegada,  geollegada, tiempoEstimado, estado, medioTransporte} = req.body;
+    //const {fechaRuta, puntoSalida, geosalida, puntoLlegada,  geollegada, tiempoEstimado, estado, medioTransporte} = req.body;
+    const { menorImage, menorName, estimadoRuta, inicioRuta, destinoRuta, numeroRuta, horaRuta} = req.body;
    
 
     console.log(req.user)
 
     const newTask = new Task({
-        fechaRuta,
-        puntoSalida,
-        puntoLlegada,
-        geosalida,
-        geollegada,
-        tiempoEstimado,
-        estado,
-        medioTransporte,
+        menorImage,
+        menorName,
+        estimadoRuta,
+        inicioRuta,
+        destinoRuta,
+        numeroRuta,
+        horaRuta
+
+        
+
+        // fechaRuta,
+        // puntoSalida,
+        // puntoLlegada,
+        // geosalida,
+        // geollegada,
+        // tiempoEstimado,
+        // estado,
+        // medioTransporte,
         //user:req.user.id
         
         
