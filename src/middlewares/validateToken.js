@@ -3,7 +3,9 @@ import { TOKEN_SECRET } from "../config.js";
 
 export const authRequired = (req, res, next) => {
 
-    const {token} = req.cookies;
+    const token = req.headers.authorization 
+    //|| req.cookies; en caso de web
+
     
     if (! token )
     return res.status (400).json({
@@ -19,7 +21,6 @@ export const authRequired = (req, res, next) => {
         req.user = user
 
         next();
-
 
     } )
 

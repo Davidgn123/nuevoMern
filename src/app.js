@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes.js";
 import taskRoutes from "./routes/tasks.routes.js";
 import menorRoutes  from "./routes/menor.routes.js";
 import noticiaRoutes from "./routes/noticias.routes.js"
+import adminRoutes from "./routes/admin.routes.js"
 
 
 const app = express()
@@ -19,5 +20,6 @@ app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
 app.use("/api", menorRoutes);
 app.use("/api", noticiaRoutes);
+app.use("/api", adminRoutes)
 
 export default app;

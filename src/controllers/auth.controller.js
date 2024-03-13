@@ -4,13 +4,12 @@ import { createAccessToken } from '../libs/jwt.js';
 
 // Registro de un nuevo usuario
 export const register = async (req, res) => {
-    const { email, password, username, tipoIdentificacion, numerodeIdentificacion, telefono, nombres, apellidos } = req.body;
+    const { email, password, tipoIdentificacion, numerodeIdentificacion, telefono, nombres, apellidos } = req.body;
 
     try {
         const passwordHash = await bcrypt.hash(password, 10);
 
         const newUser = new User({
-            username,
             email,
             password: passwordHash,
             tipoIdentificacion,
@@ -25,7 +24,6 @@ export const register = async (req, res) => {
         res.cookie('token', token);
         res.json({
             id: userSaved._id,
-            username: userSaved.username,
             email: userSaved.email,
             tipoIdentificacion: userSaved.tipoIdentificacion,
             numerodeIdentificacion: userSaved.numerodeIdentificacion,
@@ -57,7 +55,7 @@ export const login = async (req, res) => {
         res.cookie('token', token);
         res.json({
             id: userFound._id,
-            username: userFound.username,
+        
             email: userFound.email,
             tipoIdentificacion: userFound.tipoIdentificacion,
             numerodeIdentificacion: userFound.numerodeIdentificacion,
@@ -66,6 +64,8 @@ export const login = async (req, res) => {
             apellidos: userFound.apellidos,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
+            token: token,
+
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -87,7 +87,7 @@ export const profile = async (req, res) => {
 
         return res.json({
             id: userFound._id,
-            username: userFound.username,
+            
             email: userFound.email,
             tipoIdentificacion: userFound.tipoIdentificacion,
             numerodeIdentificacion: userFound.numerodeIdentificacion,
@@ -96,6 +96,7 @@ export const profile = async (req, res) => {
             apellidos: userFound.apellidos,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
+            
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -112,7 +113,7 @@ export const usuarios = async (req, res) => {
 
         return res.json({
             id: userFound._id,
-            username: userFound.username,
+            
             email: userFound.email,
             tipoIdentificacion: userFound.tipoIdentificacion,
             numerodeIdentificacion: userFound.numerodeIdentificacion,
