@@ -29,6 +29,8 @@ const menorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    
 }
 );
 
