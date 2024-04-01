@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
-import axios from 'axios'
+
 
 
 import authRoutes from "./routes/auth.routes.js";
@@ -18,7 +18,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use(axios())
+
 
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
