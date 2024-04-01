@@ -13,7 +13,7 @@ export const createNoticia = async (req, res) => {
     const newNoticia = new Noticia({
  
      nombre,
-     foto,
+    //  foto,
      descripcion,
      comentario
     });
