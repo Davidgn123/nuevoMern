@@ -4,9 +4,9 @@ const noticiaSchema = new mongoose.Schema({
     nombre: {
         type: String,
     },
-    // foto: {
-    //     type: String,
-    // },
+    foto: {
+        type: String,
+    },
     descripcion: {
         type: String,
     },
