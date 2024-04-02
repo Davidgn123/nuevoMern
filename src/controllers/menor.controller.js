@@ -6,19 +6,30 @@ export const getMenores = async (req, res) => {
     res.json(menores)
 };
 
+
+export const getMisMenores = async (req, res) => {
+    try {
+        const menores = await Menor.find({idTutor:req.params.id});
+        res.status(200).json(menores)
+    } catch (error) {
+        res.status(400).json("Error")
+    }
+
+};
+
 export const createMenor = async (req, res) => {
 
-   const { nombres, apellidos, tipoIdentificacion, numeroIdentificacion, edad, telefono, correo } = req.body
+   const { nombres, apellidos, tipoIdentificacion, numeroIdentificacion, edad, telefono, correo, idTutor } = req.body
 
    const newMenor = new Menor({
-
     nombres,
     apellidos,
     tipoIdentificacion,
     numeroIdentificacion,
     edad,
     telefono,
-    correo
+    correo,
+    idTutor:idTutor
    });
    const savedMenor = await newMenor.save();
    res.json(savedMenor);

@@ -29,6 +29,11 @@ const menorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    idTutor:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required: true
+    }
 }
 );
 

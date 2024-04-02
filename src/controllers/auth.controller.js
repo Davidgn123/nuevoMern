@@ -16,7 +16,8 @@ export const register = async (req, res) => {
             numerodeIdentificacion,
             telefono,
             nombres,
-            apellidos
+            apellidos,
+            rol:"tutor"
         });
 
         const userSaved = await newUser.save();
@@ -53,9 +54,8 @@ export const login = async (req, res) => {
 
         const token = await createAccessToken({ id: userFound._id });
         res.cookie('token', token);
-        res.json({
+        res.status(200).json({
             id: userFound._id,
-        
             email: userFound.email,
             tipoIdentificacion: userFound.tipoIdentificacion,
             numerodeIdentificacion: userFound.numerodeIdentificacion,
@@ -64,8 +64,8 @@ export const login = async (req, res) => {
             apellidos: userFound.apellidos,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
-            token: token,
-
+            rol:userFound.rol,
+            token: token
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -126,4 +126,27 @@ export const usuarios = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+
+export const deleteUser = async (req, res) =>{
+    try {
+        const users = await User.findByIdAndDelete(req.params.id)
+        if(!users) return res.status(404).json({message: 'users no encontrad'})
+        res.status(200).json(users) 
+    } catch (error) {
+        res.status(400).json("Error") 
+    }
+
+
+};
+
+export const updateusers = async (req, res) =>{
+
+    const users = await users.findByIdAndUpdate(req.params.id, req.body, {
+        new: true
+    })
+    if(!users) return res.status(404).json({message: 'users no encontrada'})
+    res.json(users) 
+
 };
