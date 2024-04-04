@@ -128,7 +128,6 @@ export const usuarios = async (req, res) => {
     }
 };
 
-
 export const deleteUser = async (req, res) =>{
     try {
         const users = await User.findByIdAndDelete(req.params.id)
@@ -150,3 +149,16 @@ export const updateusers = async (req, res) =>{
     res.json(users) 
 
 };
+
+export const ObtenerUsuarios = async (req, res) => {
+    try {
+        const allUsers = await User.find();
+
+        if (!allUsers) return res.status(404).json({ message: "No se encontraron usuarios" });
+
+        return res.json(allUsers);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
