@@ -19,6 +19,6 @@ router.get('/usuarios', usuarios)
 
 router.get('/usuarios/all', ObtenerUsuarios); // Nueva ruta para obtener todos los usuarios
 
-router.delete('/usuarios', deleteUser)
+router.delete('/usuarios/:id', deleteUser)
 
 export default router
