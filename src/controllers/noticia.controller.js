@@ -8,14 +8,16 @@ export const getNoticias = async (req, res) =>{
 
 export const createNoticia = async (req, res) => {
 
-    const { nombre, foto, descripcion, comentario } = req.body
+    const { nombre, foto, descripcion, comentario, estadoAprobacion } = req.body
  
     const newNoticia = new Noticia({
  
      nombre,
      foto,
      descripcion,
-     comentario
+     comentario,
+     aprobado: estadoAprobacion === 'Aprobado'
+     
     });
     const savedNoticia = await newNoticia.save();
     res.json(savedNoticia);
@@ -47,3 +49,30 @@ export const updateNoticia = async (req, res) =>{
     res.json(noticia) 
 
 };
+
+export const getNoticiasNoAprobadas = async (req, res) => {
+    try {
+      const noticias = await Noticia.find({ aprobado: false });
+      res.json(noticias);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  
+  export const aprobarNoticia = async (req, res) => {
+    try {
+      const noticia = await Noticia.findByIdAndUpdate(
+        req.params.id,
+        { aprobado: true },
+        { new: true }
+      );
+  
+      if (!noticia) {
+        return res.status(404).json({ message: 'Noticia no encontrada' });
+      }
+  
+      res.json(noticia);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };

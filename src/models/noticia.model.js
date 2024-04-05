@@ -13,8 +13,12 @@ const noticiaSchema = new mongoose.Schema({
     comentario: {
         type: String,
     },
-}, {
-    timestamps: true
+    aprobado: {
+        type: Boolean,
+        default: false, 
+      },
+    }, {
+      timestamps: true
 });
 
 
