@@ -76,3 +76,12 @@ export const getNoticiasNoAprobadas = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+
+  export const getNoticiasAprobadas = async (req, res) => {
+    try {
+      const noticias = await Noticia.find({ aprobado: true });
+      res.json(noticias);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
