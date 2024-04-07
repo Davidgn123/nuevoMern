@@ -2,7 +2,7 @@ import Noticia from "../models/noticia.model.js";
 
 export const getNoticias = async (req, res) => {
 
-    const Noticias = await Noticia.find({aprobado: null})
+    const Noticias = await Noticia.find({aprobado: true})
     res.json(Noticias)
 };
 
