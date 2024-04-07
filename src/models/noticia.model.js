@@ -15,7 +15,7 @@ const noticiaSchema = new mongoose.Schema({
     },
     aprobado: {
         type: Boolean,
-        default: false, 
+        default: null,
       },
     }, {
       timestamps: true
