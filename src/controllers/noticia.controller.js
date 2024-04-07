@@ -78,6 +78,25 @@ export const aprobarNoticia = async (req, res) => {
     }
 };
 
+export const rechazarNoticia = async (req, res) => {
+    try {
+        const noticia = await Noticia.findByIdAndUpdate(
+            req.params.id,
+            {aprobado: false},
+            {new: true}
+        );
+
+        if (!noticia) {
+            return res.status(404).json({message: 'Noticia no encontrada'});
+        }
+
+        res.json(noticia);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+
 export const getNoticiasAprobadas = async (req, res) => {
     try {
         const noticias = await Noticia.find({aprobado: true});
