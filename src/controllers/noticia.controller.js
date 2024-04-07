@@ -2,7 +2,7 @@ import Noticia from "../models/noticia.model.js";
 
 export const getNoticias = async (req, res) => {
 
-    const Noticias = await Noticia.find({aprobado: true})
+    const Noticias = await Noticia.find({aprobado: null})
     res.json(Noticias)
 };
 
@@ -14,7 +14,8 @@ export const createNoticia = async (req, res) => {
         nombre,
         foto,
         descripcion,
-        comentario
+        comentario,
+        aprobado:null
     });
     const savedNoticia = await newNoticia.save();
     res.json(savedNoticia);
