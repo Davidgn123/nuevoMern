@@ -1,25 +1,27 @@
 import mongoose from "mongoose";
 
 const noticiaSchema = new mongoose.Schema({
-    nombre: {
-        type: String,
+        nombre: {
+            type: String,
+        },
+        foto: {
+            type: String,
+        },
+        descripcion: {
+            type: String,
+        },
+        comentario: {
+            type: String,
+        },
+        aprobado: {
+            type: Boolean,
+            default: null,
+        },
     },
-    foto: {
-        type: String,
-    },
-    descripcion: {
-        type: String,
-    },
-    comentario: {
-        type: String,
-    },
-    aprobado: {
-        type: Boolean,
-        default: null,
-      },
-    }, {
-      timestamps: true
-});
+    {
+        timestamps: true
+    }
+);
 
 
 export default mongoose.model('Noticia', noticiaSchema);

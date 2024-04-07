@@ -8,16 +8,13 @@ export const getNoticias = async (req, res) => {
 
 export const createNoticia = async (req, res) => {
 
-    const {nombre, foto, descripcion, comentario, estadoAprobacion} = req.body
+    const {nombre, foto, descripcion, comentario } = req.body
 
     const newNoticia = new Noticia({
-
         nombre,
         foto,
         descripcion,
-        comentario,
-        aprobado: estadoAprobacion === 'Aprobado'
-
+        comentario
     });
     const savedNoticia = await newNoticia.save();
     res.json(savedNoticia);
