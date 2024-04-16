@@ -3,9 +3,6 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 
-
-
-
 import authRoutes from "./routes/auth.routes.js";
 import taskRoutes from "./routes/tasks.routes.js";
 import menorRoutes  from "./routes/menor.routes.js";
