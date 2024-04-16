@@ -1,48 +1,55 @@
-
-import { json } from "express";
 import Task from "../models/task.model.js";
+import { nanoid } from "nanoid";
 
 export const getTasks = async (req, res) =>{
-
-    const tasks = await Task.find()
-    res.json(tasks)
+    try {
+        // Obtén el ID del tutor autenticado desde req.user.id
+        const tutorId = req.user.id;
+        const { idMenor } = req.body;
+    
+        // Busca solo las tareas creadas por el tutor actual
+        const tasks = await Task.find({ idTutor: tutorId, idMenor: idMenor });
+    
+        res.json(tasks);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 };
 
 export const createTask = async (req, res) =>{
-    //const {fechaRuta, puntoSalida, geosalida, puntoLlegada,  geollegada, tiempoEstimado, estado, medioTransporte} = req.body;
-    const { menorImage, menorName, estimadoRuta, inicioRuta, destinoRuta, numeroRuta, horaRuta} = req.body;
-   
+    // Extrae los datos de la solicitud
+    const { menorName, menorApellido, estimadoRuta, inicioRuta, destinoRuta } = req.body;
+    const idMenor = req.body.idMenor; // Asegúrate de que idMenor esté presente en el cuerpo de la solicitud
 
-    console.log(req.user)
+    const code = nanoid(10) // Genera un código de 10 caracteres
 
+
+    // Crea una nueva tarea con los datos proporcionados
     const newTask = new Task({
-        menorImage,
+        code,
         menorName,
+        menorApellido,
         estimadoRuta,
         inicioRuta,
         destinoRuta,
-        numeroRuta,
-        horaRuta
-
-        
-
-        // fechaRuta,
-        // puntoSalida,
-        // puntoLlegada,
-        // geosalida,
-        // geollegada,
-        // tiempoEstimado,
-        // estado,
-        // medioTransporte,
-        //user:req.user.id
-        
+        idTutor: req.user.id, // ID del tutor autenticado
+        idMenor: idMenor, // ID del menor proporcionado como parámetro de la URL
         
     });
-    const savedTask = await newTask.save();
-    res.json(savedTask);
 
-    
+    // Guarda la tarea en la base de datos
+    try {
+        const savedTask = await newTask.save();
+        // Incluye idMenor en la respuesta JSON
+        res.json({ ...savedTask.toJSON(), idMenor: idMenor, code });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al crear la Ruta" });
+    }
 };
+
 
 export const getTask = async (req, res) =>{
 
@@ -68,3 +75,4 @@ export const updateTask = async (req, res) =>{
     res.json(task) 
 
 };
+

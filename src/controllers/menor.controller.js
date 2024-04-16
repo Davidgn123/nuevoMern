@@ -1,4 +1,5 @@
 import Menor from "../models/menor.model.js";
+import Ruta from "../models/task.model.js";
 
 
 export const getMenores = async (req, res) => {
@@ -61,3 +62,38 @@ export const deleteMenor = async (req, res) => {
     res.json(menor)
 
 };
+
+export const loginMenor = async (req, res) => {
+    try {
+      const { code, idMenor } = req.body;
+  
+      // Buscar la ruta con el código proporcionado
+      const ruta = await Ruta.findOne({ code }).populate("idTutor");
+  
+      if (!ruta) {
+        return res.status(404).json({ message: 'Código inválido' });
+      }
+  
+      // Buscar al menor asociado al idMenor proporcionado
+      const menor = await Menor.findById(idMenor);
+  
+      if (!menor) {
+        return res.status(401).json({ message: 'ID de menor inválido' });
+      }
+  
+      // Verificar si el tutor asociado a la ruta es el mismo que el tutor asociado al menor
+      if (ruta.idTutor._id.toString() !== menor.idTutor.toString()) {
+        return res.status(401).json({ message: 'No autorizado' });
+      }
+  
+      // Enviar mensaje de inicio de sesión exitoso junto con los datos del menor y la ruta
+      res.json({
+        message: 'Inicio de sesión exitoso',
+        menor,
+        ruta,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  };

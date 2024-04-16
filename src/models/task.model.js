@@ -3,13 +3,24 @@ import mongoose from "mongoose";
 // Ruta model
 const rutaSchema = new mongoose.Schema({
 
-    menorImage: {type: String, required: true},
     menorName: {type: String, required: true},
+    menorApellido: {type: String, required: true},
+
     estimadoRuta: {type: String, required: true},
+
     inicioRuta: {type: String, required: true},
+    
     destinoRuta: {type: String, required: true},
-    numeroRuta: {type: String, required: true},
-    horaRuta: {type: String, required: true},
+    
+
+    // Referencia al tutor (user)
+    idTutor: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+
+    // Referencia al menor
+    idMenor: { type: mongoose.Schema.Types.ObjectId, ref: 'Menor', requiere: true},
+    
+    code: { type: String }, // Agrega este campo sin marcarlo como requerido
+    
 
 
     // fechaRuta: { type: Date, required: true },
