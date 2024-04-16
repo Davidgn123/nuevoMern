@@ -1,3 +1,4 @@
+
 import Task from "../models/task.model.js";
 import { nanoid } from "nanoid";
 
@@ -5,10 +6,10 @@ export const getTasks = async (req, res) =>{
     try {
         // Obtén el ID del tutor autenticado desde req.user.id
         const tutorId = req.user.id;
-        const { idMenor } = req.body;
+        //const { idMenor } = req.body;
     
         // Busca solo las tareas creadas por el tutor actual
-        const tasks = await Task.find({ idTutor: tutorId, idMenor: idMenor });
+        const tasks = await Task.find({ idTutor: tutorId /*, idMenor: idMenor*/ });
     
         res.json(tasks);
     } catch (error) {
