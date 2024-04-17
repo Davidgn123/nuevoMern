@@ -21,11 +21,13 @@ const userSchema = new mongoose.Schema({
     numerodeIdentificacion: {
         type: Number,
         required: true,
+        unique: true,
         trim: true
     },
     telefono: {
         type: Number,
         required: true,
+        unique: true,
         trim: true
     },
     nombres: {

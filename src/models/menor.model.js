@@ -15,7 +15,8 @@ const menorSchema = new mongoose.Schema({
     },
     numeroIdentificacion: {
         type: Number,
-        required: true
+        required: true,
+        unique: true,
     },
     edad: {
         type: Number,
@@ -23,10 +24,12 @@ const menorSchema = new mongoose.Schema({
     },
     telefono: {
         type: Number,
+        unique: true,
         required: true
     },
     correo: {
         type: String,
+        unique: true,
         required: true
     },
     idTutor:{
